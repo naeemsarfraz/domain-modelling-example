@@ -77,12 +77,14 @@ namespace ProcurementManagerSpike
 
         public void RequestGoods(SupplierId supplierRef, DepotId depotRef, PurchaseItem[] purchaseItems)
         {
+            #region hide for convenience
             if (supplierRef == null)
                 throw new ArgumentException("Missing", nameof(supplierRef));
             if (depotRef == null)
                 throw new ArgumentException("Missing", nameof(depotRef));
             if (purchaseItems.Length == 0)
                 throw new ArgumentException("Missing", nameof(purchaseItems));
+            #endregion
 
             Supplier supplier = _supplierRepository.Get(supplierRef);
             Depot depot = _depotRepository.Get(depotRef);
@@ -94,12 +96,14 @@ namespace ProcurementManagerSpike
 
         public void RequestGoods(SupplierId supplierRef, DepotId[] depotRefs, PurchaseItem[] purchaseItems)
         {
+            #region hide for convenience
             if (supplierRef == null)
                 throw new ArgumentException("Missing", nameof(supplierRef));
             if (depotRefs.Length == 0)
                 throw new ArgumentException("Missing", nameof(depotRefs));
             if (purchaseItems.Length == 0)
                 throw new ArgumentException("Missing", nameof(purchaseItems));
+            #endregion
 
             Supplier supplier = _supplierRepository.Get(supplierRef);
 
