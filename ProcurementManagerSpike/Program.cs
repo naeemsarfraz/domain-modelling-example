@@ -16,12 +16,24 @@ namespace ProcurementManagerSpike
                 new SupplierId("SUP-AA-01"),
                 new DepotId("DEP-AA-01"),
                 new[] {new PurchaseItem { Product = "Tyres", Qty = 4, UnitPrice = 59.99 } });
-            
+
+            var goods = new[] {new PurchaseItem {Product = "Tyres", Qty = 4, UnitPrice = 59.99}};
+            var requestForDepot1 = new DepotRequest {DepotId = new DepotId("DEP-AA-01"), Items = goods};
+            var requestForDepot2 = new DepotRequest {DepotId = new DepotId("DEP-AA-02"), Items = goods};
+
             purchaseService.RequestGoods(
                 new SupplierId("SUP-AA-01"),
-                new[] { new DepotId("DEP-AA-01"), new DepotId("DEP-AA-02") },
-                new[] { new PurchaseItem { Product = "Tyres", Qty = 4, UnitPrice = 59.99 } });
+                new[] {
+                    requestForDepot1,
+                    requestForDepot2
+                });
         }
+    }
+
+    internal class DepotRequest
+    {
+        public DepotId DepotId { get; set; }
+        public PurchaseItem[] Items { get; set; }
     }
 
     internal class DepotId
@@ -112,6 +124,20 @@ namespace ProcurementManagerSpike
                 Depot depot = _depotRepository.Get(depotRef);
 
                 PurchaseRequest purchaseRequest = new PurchaseRequest(supplier, depot, purchaseItems);
+
+                _purchaseRequestRepository.Save(purchaseRequest);
+            }
+        }
+
+        public void RequestGoods(SupplierId supplierRef, DepotRequest[] depotRequest)
+        {
+            Supplier supplier = _supplierRepository.Get(supplierRef);
+
+            foreach (var request in depotRequest)
+            {
+                Depot depot = _depotRepository.Get(request.DepotId);
+
+                PurchaseRequest purchaseRequest = new PurchaseRequest(supplier, depot, request.Items);
 
                 _purchaseRequestRepository.Save(purchaseRequest);
             }
