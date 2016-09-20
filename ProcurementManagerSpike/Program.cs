@@ -13,22 +13,37 @@ namespace ProcurementManagerSpike
                 new PurchaseOrderRepository());
 
             purchaseService.RequestGoods(
-                new SupplierId(),
-                new DepotId(),
-                new[] {new PurchaseItem()});
+                new SupplierId("SUP-AA-01"),
+                new DepotId("DEP-AA-01"),
+                new[] {new PurchaseItem { Product = "Tyres", Qty = 4, UnitPrice = 59.99 } });
         }
     }
 
     internal class DepotId
     {
+        public string DepotRef { get; set; }
+
+        public DepotId(string depotRef)
+        {
+            DepotRef = depotRef;
+        }
     }
 
     internal class SupplierId
     {
+        public string SupplierRef { get; set; }
+
+        public SupplierId(string supplierRef)
+        {
+            SupplierRef = supplierRef;
+        }
     }
 
     internal class PurchaseItem
     {
+        public string Product { get; set; }
+        public int Qty { get; set; }
+        public double UnitPrice { get; set; }
     }
 
     internal class Depot
@@ -67,9 +82,9 @@ namespace ProcurementManagerSpike
             Supplier supplier = _supplierRepository.Get(supplierRef);
             Depot depot = _depotRepository.Get(depotRef);
 
-            PurchaseOrder newPO = new PurchaseOrder(supplier, depot, purchaseItems);
+            PurchaseOrder newPurchaseOrder = new PurchaseOrder(supplier, depot, purchaseItems);
 
-            _purchaseOrderRepository.Save(newPO);
+            _purchaseOrderRepository.Save(newPurchaseOrder);
         }
     }
 
