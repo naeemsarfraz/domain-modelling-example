@@ -90,10 +90,17 @@ namespace ProcurementManagerSpike
 
     internal class PurchaseOrder
     {
+        public PurchaseOrderStatus Status { get; set; }
+
         public PurchaseOrder(Supplier supplier, Depot depot, PurchaseItem[] purchaseItems)
         {
-            throw new NotImplementedException();
+            Status = PurchaseOrderStatus.Requested;
         }
+    }
+
+    internal enum PurchaseOrderStatus
+    {
+        Requested
     }
 
     internal class PurchaseOrderRepository
