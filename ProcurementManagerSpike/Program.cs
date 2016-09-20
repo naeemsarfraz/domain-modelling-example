@@ -9,7 +9,8 @@ namespace ProcurementManagerSpike
         {
             PurchaseService purchaseService = new PurchaseService(
                 new SupplierRepository(), 
-                new DepotRepository());
+                new DepotRepository(),
+                new PurchaseOrderRepository());
 
             purchaseService.RequestGoods(
                 new SupplierId(),
@@ -62,11 +63,30 @@ namespace ProcurementManagerSpike
                 throw new ArgumentException("Missing", nameof(depotRef));
             if (purchaseItems.Length == 0)
                 throw new ArgumentException("Missing", nameof(purchaseItems));
+
+            Supplier supplier = _supplierRepository.Get(supplierRef);
+            Depot depot = _depotRepository.Get(depotRef);
+
+            PurchaseOrder newPO = new PurchaseOrder(supplier, depot, purchaseItems);
+
+            _purchaseOrderRepository.Save(newPO);
+        }
+    }
+
+    internal class PurchaseOrder
+    {
+        public PurchaseOrder(Supplier supplier, Depot depot, PurchaseItem[] purchaseItems)
+        {
+            throw new NotImplementedException();
         }
     }
 
     internal class PurchaseOrderRepository
     {
+        public void Save(PurchaseOrder newPo)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal class SupplierRepository
