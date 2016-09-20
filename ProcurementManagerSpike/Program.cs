@@ -16,6 +16,11 @@ namespace ProcurementManagerSpike
                 new SupplierId("SUP-AA-01"),
                 new DepotId("DEP-AA-01"),
                 new[] {new PurchaseItem { Product = "Tyres", Qty = 4, UnitPrice = 59.99 } });
+            
+            purchaseService.RequestGoods(
+                new SupplierId("SUP-AA-01"),
+                new[] { new DepotId("DEP-AA-01"), new DepotId("DEP-AA-02") },
+                new[] { new PurchaseItem { Product = "Tyres", Qty = 4, UnitPrice = 59.99 } });
         }
     }
 
@@ -85,6 +90,27 @@ namespace ProcurementManagerSpike
             PurchaseRequest purchaseRequest = new PurchaseRequest(supplier, depot, purchaseItems);
 
             _purchaseRequestRepository.Save(purchaseRequest);
+        }
+
+        public void RequestGoods(SupplierId supplierRef, DepotId[] depotRefs, PurchaseItem[] purchaseItems)
+        {
+            if (supplierRef == null)
+                throw new ArgumentException("Missing", nameof(supplierRef));
+            if (depotRefs.Length == 0)
+                throw new ArgumentException("Missing", nameof(depotRefs));
+            if (purchaseItems.Length == 0)
+                throw new ArgumentException("Missing", nameof(purchaseItems));
+
+            Supplier supplier = _supplierRepository.Get(supplierRef);
+
+            foreach (var depotRef in depotRefs)
+            {
+                Depot depot = _depotRepository.Get(depotRef);
+
+                PurchaseRequest purchaseRequest = new PurchaseRequest(supplier, depot, purchaseItems);
+
+                _purchaseRequestRepository.Save(purchaseRequest);
+            }
         }
     }
 
