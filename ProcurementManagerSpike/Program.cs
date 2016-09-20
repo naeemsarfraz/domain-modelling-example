@@ -10,7 +10,7 @@ namespace ProcurementManagerSpike
             PurchaseService purchaseService = new PurchaseService(
                 new SupplierRepository(), 
                 new DepotRepository(),
-                new PurchaseOrderRepository());
+                new PurchaseRequestRepository());
 
             purchaseService.RequestGoods(
                 new SupplierId("SUP-AA-01"),
@@ -58,16 +58,16 @@ namespace ProcurementManagerSpike
     {
         private readonly SupplierRepository _supplierRepository;
         private readonly DepotRepository _depotRepository;
-        private readonly PurchaseOrderRepository _purchaseOrderRepository;
+        private readonly PurchaseRequestRepository _purchaseRequestRepository;
 
         public PurchaseService(
             SupplierRepository supplierRepository, 
             DepotRepository depotRepository,
-            PurchaseOrderRepository purchaseOrderRepository)
+            PurchaseRequestRepository purchaseRequestRepository)
         {
             _supplierRepository = supplierRepository;
             _depotRepository = depotRepository;
-            _purchaseOrderRepository = purchaseOrderRepository;
+            _purchaseRequestRepository = purchaseRequestRepository;
         }
 
         public void RequestGoods(SupplierId supplierRef, DepotId depotRef, PurchaseItem[] purchaseItems)
@@ -82,30 +82,22 @@ namespace ProcurementManagerSpike
             Supplier supplier = _supplierRepository.Get(supplierRef);
             Depot depot = _depotRepository.Get(depotRef);
 
-            PurchaseOrder newPurchaseOrder = new PurchaseOrder(supplier, depot, purchaseItems);
+            PurchaseRequest purchaseRequest = new PurchaseRequest(supplier, depot, purchaseItems);
 
-            _purchaseOrderRepository.Save(newPurchaseOrder);
+            _purchaseRequestRepository.Save(purchaseRequest);
         }
     }
 
-    internal class PurchaseOrder
+    internal class PurchaseRequest
     {
-        public PurchaseOrderStatus Status { get; set; }
-
-        public PurchaseOrder(Supplier supplier, Depot depot, PurchaseItem[] purchaseItems)
+        public PurchaseRequest(Supplier supplier, Depot depot, PurchaseItem[] purchaseItems)
         {
-            Status = PurchaseOrderStatus.Requested;
         }
     }
 
-    internal enum PurchaseOrderStatus
+    internal class PurchaseRequestRepository
     {
-        Requested
-    }
-
-    internal class PurchaseOrderRepository
-    {
-        public void Save(PurchaseOrder newPo)
+        public void Save(PurchaseRequest request)
         {
             throw new NotImplementedException();
         }
