@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain Modelling Example", "Domain Modelling Example\Domain Modelling Example.csproj", "{D62AEDCC-06AD-4659-9368-0EB6E5C6E94A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcurementManagerSpike", "ProcurementManagerSpike\ProcurementManagerSpike.csproj", "{F5352125-1818-44BB-AB59-0F2DAFF7E372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D62AEDCC-06AD-4659-9368-0EB6E5C6E94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D62AEDCC-06AD-4659-9368-0EB6E5C6E94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D62AEDCC-06AD-4659-9368-0EB6E5C6E94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D62AEDCC-06AD-4659-9368-0EB6E5C6E94A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5352125-1818-44BB-AB59-0F2DAFF7E372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5352125-1818-44BB-AB59-0F2DAFF7E372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5352125-1818-44BB-AB59-0F2DAFF7E372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5352125-1818-44BB-AB59-0F2DAFF7E372}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
